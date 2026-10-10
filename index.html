@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <meta name="theme-color" content="#12182c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Dev Room">
+  <title>Developer's Room - Hostel Lo-Fi Radio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <!-- Hero Section: Over-the-shoulder view of developer coding in hostel room -->
+  <section class="stage" id="stage" aria-label="A developer typing code at a desk in a sunlit hostel room">
+    <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="wallg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f4fa"/><stop offset="1" stop-color="#d7e1ee"/></linearGradient>
+        <linearGradient id="floorg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9c7a7"/><stop offset="1" stop-color="#b59d78"/></linearGradient>
+        <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5eb1e4"/><stop offset="1" stop-color="#d4ecf9"/></linearGradient>
+        <linearGradient id="deskg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcb68a"/><stop offset="1" stop-color="#b98a5c"/></linearGradient>
+        <linearGradient id="deskedge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a47a4e"/><stop offset="1" stop-color="#7b5733"/></linearGradient>
+        <linearGradient id="underg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3d30"/><stop offset="1" stop-color="#8f7b60"/></linearGradient>
+        <linearGradient id="hoodie" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#27314d"/><stop offset=".55" stop-color="#3d4b72"/><stop offset="1" stop-color="#6679a6"/></linearGradient>
+        <linearGradient id="sleeve" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46567f"/><stop offset="1" stop-color="#2d3858"/></linearGradient>
+        <linearGradient id="chairg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#171b24"/><stop offset=".5" stop-color="#303745"/><stop offset="1" stop-color="#1a1e28"/></linearGradient>
+        <radialGradient id="hairg" cx=".42" cy=".3" r=".8"><stop offset="0" stop-color="#4c3b31"/><stop offset=".55" stop-color="#1c1512"/><stop offset="1" stop-color="#0a0706"/></radialGradient>
+        <radialGradient id="skin" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#d9a07a"/><stop offset="1" stop-color="#a66c4a"/></radialGradient>
+        <linearGradient id="neckg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4b33"/><stop offset="1" stop-color="#b97d58"/></linearGradient>
+        <linearGradient id="cupg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a5163"/><stop offset="1" stop-color="#1b1f2b"/></linearGradient>
+        <linearGradient id="beamg" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c4" stop-opacity=".7"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></linearGradient>
+        <linearGradient id="washg" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffe6a8" stop-opacity=".34"/><stop offset=".6" stop-color="#ffe6a8" stop-opacity="0"/></linearGradient>
+        <radialGradient id="scrglow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8fd8ff" stop-opacity=".42"/><stop offset="1" stop-color="#8fd8ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".6" stop-color="#0b1020" stop-opacity="0"/><stop offset="1" stop-color="#0b1020" stop-opacity=".42"/></radialGradient>
+        <pattern id="mesh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#ffffff" stroke-opacity=".09" stroke-width="1.4"/></pattern>
+        <filter id="b1" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="1.8"/></filter>
+        <filter id="b05" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation=".7"/></filter>
+        <filter id="b3"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="b8" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="b16" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+        <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .6 0"/></filter>
+        <!-- Dark Mode & Lamp Gradients -->
+        <linearGradient id="nightwall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141a2e"/><stop offset="1" stop-color="#090d18"/></linearGradient>
+        <linearGradient id="nightfloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#241d17"/><stop offset="1" stop-color="#120e0a"/></linearGradient>
+        <linearGradient id="nightsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070a14"/><stop offset="1" stop-color="#162038"/></linearGradient>
+        <radialGradient id="lampbulb" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#fff5b3"/><stop offset="70%" stop-color="#ffb833" stop-opacity="0.95"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></radialGradient>
+        <linearGradient id="lampbeam" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0%" stop-color="#ffe680" stop-opacity="0.85"/><stop offset="50%" stop-color="#ffca4d" stop-opacity="0.45"/><stop offset="100%" stop-color="#ffaa00" stop-opacity="0"/></linearGradient>
+        <radialGradient id="deskglow" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#ffe899" stop-opacity="0.75"/><stop offset="55%" stop-color="#ffb833" stop-opacity="0.3"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></radialGradient>
+        <linearGradient id="lampbeam-books" x1="0" y1="0" x2="0.85" y2="0.85"><stop offset="0%" stop-color="#fff4b8" stop-opacity="0.92"/><stop offset="40%" stop-color="#ffd055" stop-opacity="0.55"/><stop offset="80%" stop-color="#ffa81e" stop-opacity="0.18"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></linearGradient>
+        <radialGradient id="booksglow" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#fff5c4" stop-opacity="0.9"/><stop offset="45%" stop-color="#ffc740" stop-opacity="0.48"/><stop offset="80%" stop-color="#ffa01b" stop-opacity="0.15"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></radialGradient>
+        <!-- Gradients for Right Desk Lamp focused directly on Paper and Pen -->
+        <linearGradient id="lampbeam-paper" x1="0.65" y1="0" x2="0.3" y2="1"><stop offset="0%" stop-color="#fff6bf" stop-opacity="0.95"/><stop offset="35%" stop-color="#ffd56b" stop-opacity="0.65"/><stop offset="75%" stop-color="#ffb02e" stop-opacity="0.25"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></linearGradient>
+        <radialGradient id="paperglow" cx="50%" cy="48%" r="50%"><stop offset="0%" stop-color="#fff8d4" stop-opacity="0.95"/><stop offset="40%" stop-color="#ffd255" stop-opacity="0.6"/><stop offset="75%" stop-color="#ffa81e" stop-opacity="0.22"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0"/></radialGradient>
+
+        <clipPath id="skyclip"><rect x="1242" y="112" width="286" height="326"/></clipPath>
+        <clipPath id="screenclip"><rect x="802" y="212" width="416" height="256" rx="3"/></clipPath>
+        <clipPath id="photoclip"><rect x="8" y="8" width="76" height="76" rx="2"/></clipPath>
+      </defs>
+
+      <g class="cam">
+        <!-- ================= BACKGROUND (soft focus) ================= -->
+        <g class="l l-bg">
+          <g filter="url(#b1)">
+            <rect class="room-wall" x="-40" y="-30" width="1680" height="560" fill="url(#wallg)"/>
+            <rect class="room-floor" x="-40" y="520" width="1680" height="320" fill="url(#floorg)"/>
+            <g stroke="#6b5a3e" stroke-opacity=".14" stroke-width="2"><line x1="-40" y1="610" x2="1640" y2="610"/><line x1="-40" y1="700" x2="1640" y2="700"/></g>
+
+            <!-- window -->
+            <rect x="1230" y="100" width="310" height="350" rx="5" fill="#f8fafd" stroke="#9fb0c6" stroke-width="4"/>
+            <g clip-path="url(#skyclip)">
+              <rect class="window-sky" x="1242" y="112" width="286" height="326" fill="url(#skyg)"/>
+              <circle class="celestial-body" cx="1440" cy="192" r="70" fill="#fff6c2" opacity=".55"/>
+              <circle class="celestial-core" cx="1440" cy="192" r="34" fill="#ffd25e"/>
+              <g class="night-stars" id="night-stars"></g>
+              <g class="clouds" fill="#ffffff" opacity=".95">
+                <ellipse cx="1330" cy="200" rx="50" ry="15"/><ellipse cx="1356" cy="188" rx="34" ry="15"/>
+                <ellipse cx="1470" cy="300" rx="44" ry="13"/><ellipse cx="1448" cy="290" rx="26" ry="13"/>
+              </g>
+              <g fill="#86a9bf"><rect x="1242" y="382" width="50" height="56"/><rect x="1286" y="352" width="44" height="86"/><rect x="1326" y="392" width="56" height="46"/><rect x="1380" y="340" width="50" height="98"/><rect x="1426" y="372" width="46" height="66"/><rect x="1468" y="354" width="60" height="84"/></g>
+              <g id="bwin"></g>
+            </g>
+            <rect x="1380" y="112" width="8" height="326" fill="#f8fafd" stroke="#9fb0c6" stroke-width="1.5"/>
+            <rect x="1242" y="270" width="286" height="8" fill="#f8fafd" stroke="#9fb0c6" stroke-width="1.5"/>
+            <rect x="1218" y="450" width="334" height="14" rx="2" fill="#cdd7e4"/>
+            <path class="curtain" d="M1236,108 C1262,160 1250,260 1274,438 L1236,438 Z" fill="#fff8e6" opacity=".92"/>
+            <path class="curtain" d="M1534,108 C1508,160 1520,260 1498,438 L1534,438 Z" fill="#fff8e6" opacity=".92" style="animation-delay:-3s"/>
+            <g>
+              <ellipse cx="1290" cy="428" rx="8" ry="22" fill="#2f7a62" transform="rotate(-24 1290 440)"/><ellipse cx="1306" cy="420" rx="9" ry="26" fill="#3b9477"/><ellipse cx="1322" cy="430" rx="8" ry="22" fill="#2f7a62" transform="rotate(24 1322 442)"/>
+              <path d="M1280,440 H1332 L1326,464 H1286 Z" fill="#b0613f"/><rect x="1278" y="436" width="56" height="8" rx="2" fill="#c9714c"/>
+            </g>
+
+
+
+            <!-- bunk bed -->
+            <g>
+              <rect x="40" y="150" width="12" height="500" fill="#5a3e2c"/><rect x="268" y="150" width="12" height="500" fill="#5a3e2c"/>
+              <rect x="40" y="304" width="240" height="12" fill="#6a4a35"/>
+              <rect x="52" y="274" width="216" height="32" rx="8" fill="#2c4b5a"/><rect x="108" y="268" width="160" height="38" rx="10" fill="#2f6f73"/>
+              <ellipse cx="82" cy="276" rx="26" ry="12" fill="#e8dfc8"/>
+              <rect x="40" y="236" width="240" height="8" fill="#6a4a35"/><rect x="40" y="258" width="240" height="8" fill="#6a4a35"/>
+              <rect x="40" y="506" width="240" height="12" fill="#6a4a35"/>
+              <rect x="52" y="474" width="216" height="34" rx="8" fill="#5e3446"/><rect x="116" y="466" width="152" height="42" rx="10" fill="#8a4a5c"/>
+              <ellipse cx="82" cy="478" rx="26" ry="12" fill="#e8dfc8"/>
+              <rect x="212" y="316" width="6" height="190" fill="#5a3e2c"/><rect x="236" y="316" width="6" height="190" fill="#5a3e2c"/>
+              <g stroke="#5a3e2c" stroke-width="5"><line x1="212" y1="346" x2="242" y2="346"/><line x1="212" y1="386" x2="242" y2="386"/><line x1="212" y1="426" x2="242" y2="426"/><line x1="212" y1="466" x2="242" y2="466"/></g>
+              <rect x="66" y="570" width="140" height="64" rx="4" fill="#4a5c78" stroke="#2f3d58" stroke-width="2"/>
+              <g stroke="#2f3d58" stroke-width="3"><line x1="66" y1="590" x2="206" y2="590"/><line x1="66" y1="612" x2="206" y2="612"/><line x1="90" y1="570" x2="90" y2="634"/><line x1="182" y1="570" x2="182" y2="634"/></g>
+              <rect x="124" y="576" width="14" height="12" rx="2" fill="#ffb454"/>
+            </g>
+          </g>
+
+          <!-- wall decor -->
+          <g filter="url(#b05)">
+            <g transform="translate(100 70)"><rect width="152" height="36" rx="3" fill="#b98c45" stroke="#7d5c26" stroke-width="2"/><text x="76" y="24" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="15" font-weight="700" fill="#2a1c0a" letter-spacing="1.5">ROOM 4012</text></g>
+            <g transform="translate(410 150)">
+              <rect width="96" height="128" fill="#ddd3b9" stroke="#56668a" stroke-width="3"/><rect width="96" height="22" fill="#e87a90"/>
+              <text x="48" y="15" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="9" font-weight="700" fill="#fff" letter-spacing="2">ERROR</text>
+              <text x="48" y="72" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="34" font-weight="700" fill="#1a1f33">404</text>
+              <text x="48" y="94" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="9" fill="#1a1f33">sleep</text>
+              <text x="48" y="106" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="9" fill="#1a1f33">not found</text>
+            </g>
+            <g transform="translate(1100 150)">
+              <circle r="42" fill="#ece6d6" stroke="#2a3252" stroke-width="6"/>
+              <g stroke="#1a1f33" stroke-width="3" stroke-linecap="round"><line x1="0" y1="-34" x2="0" y2="-28"/><line x1="34" y1="0" x2="28" y2="0"/><line x1="0" y1="34" x2="0" y2="28"/><line x1="-34" y1="0" x2="-28" y2="0"/></g>
+              <line id="hh" x1="0" y1="0" x2="0" y2="-20" stroke="#1a1f33" stroke-width="4.5" stroke-linecap="round"/>
+              <line id="mm" x1="0" y1="0" x2="0" y2="-30" stroke="#1a1f33" stroke-width="3" stroke-linecap="round"/>
+              <line id="ss" x1="0" y1="6" x2="0" y2="-33" stroke="#d9526e" stroke-width="1.4" stroke-linecap="round"/>
+              <circle r="3.5" fill="#d9526e"/>
+            </g>
+            <!-- pinned photo: Raghab image in home page blank frame -->
+            <g transform="translate(566 214) rotate(-4)">
+              <rect x="-4" y="-4" width="100" height="120" rx="2" fill="#000" opacity=".12" filter="url(#b3)"/>
+              <rect width="92" height="112" fill="#fbfbf8" stroke="#cfd6e2"/>
+              <image href="raghab_avatar.jpg" x="8" y="8" width="76" height="76" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoclip)"/>
+              <rect x="8" y="8" width="76" height="76" rx="2" fill="none" stroke="#cfd6e2" stroke-width="1"/>
+              <text x="46" y="100" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="7.5" font-weight="600" fill="#2a354d">Raghab ❤️</text>
+              <rect x="26" y="-8" width="40" height="14" fill="#fff" opacity=".6" transform="rotate(3 46 0)"/>
+            </g>
+          </g>
+          <g id="lights"></g>
+        </g>
+
+        <!-- ================= MIDGROUND ================= -->
+        <g class="l l-mid">
+          <!-- sunbeam from window -->
+          <g class="sunbeam" style="mix-blend-mode:soft-light">
+            <polygon points="1232,150 1232,450 560,790 560,500" fill="url(#beamg)" filter="url(#b16)"/>
+          </g>
+          <g id="motes"></g>
+
+          <!-- desk -->
+          <polygon points="330,520 1500,520 1580,640 150,640" fill="url(#deskg)"/>
+          <g stroke="#8f6a43" stroke-opacity=".18" stroke-width="2"><line x1="360" y1="560" x2="1480" y2="560"/><line x1="250" y1="600" x2="1550" y2="600"/></g>
+          <rect x="150" y="640" width="1430" height="24" fill="url(#deskedge)"/>
+          <rect x="150" y="664" width="1430" height="140" fill="url(#underg)"/>
+          <rect x="150" y="664" width="34" height="140" fill="#6a4a35"/><rect x="1546" y="664" width="34" height="140" fill="#6a4a35"/>
+          <rect x="1220" y="690" width="84" height="110" rx="4" fill="#dfe5ee" stroke="#8f9db5" stroke-width="2"/><circle cx="1262" cy="710" r="4" fill="#1fa98c"/><rect x="1236" y="736" width="52" height="3" fill="#8f9db5"/><rect x="1236" y="746" width="52" height="3" fill="#8f9db5"/>
+          <ellipse cx="1010" cy="590" rx="360" ry="40" fill="#fff" opacity=".1" filter="url(#b16)"/>
+
+          <!-- monitor glow -->
+          <ellipse class="screenglow" cx="1010" cy="340" rx="380" ry="240" fill="url(#scrglow)" style="mix-blend-mode:screen"/>
+
+          <!-- left speaker -->
+          <rect x="380" y="450" width="44" height="70" rx="10" fill="#252b3f" stroke="#8f9db5" stroke-width="2"/>
+          <g fill="#78e0cc"><rect class="eq e1" x="388" y="472" width="5" height="30"/><rect class="eq e2" x="396" y="472" width="5" height="30"/><rect class="eq e3" x="404" y="472" width="5" height="30"/><rect class="eq e4" x="412" y="472" width="5" height="30"/></g>
+          <circle cx="402" cy="460" r="4" fill="#3b4568"/>
+
+          <!-- DESK LAMP ("lamb light" - turns ON with warm cone in Dark Mode) -->
+          <g class="desk-lamp" id="desk-lamp">
+            <!-- Lamp Light Beam & Desk Pool (Visible in Dark Mode) -->
+            <g class="lamp-beam-wrap" id="lamp-beam-wrap">
+              <polygon class="lamp-beam" points="492,442 410,670 760,660" fill="url(#lampbeam)" style="mix-blend-mode:screen; pointer-events:none;"/>
+              <ellipse class="lamp-pool" cx="585" cy="615" rx="155" ry="46" fill="url(#deskglow)" style="mix-blend-mode:screen; pointer-events:none;"/>
+            </g>
+            <!-- Desk Lamp Base on desk -->
+            <ellipse cx="440" cy="534" rx="20" ry="7" fill="#1b2336" stroke="#485b7d" stroke-width="1.6"/>
+            <rect x="436" y="525" width="8" height="10" rx="2" fill="#2d3954"/>
+            <!-- Articulated Metal Arm -->
+            <path d="M440,526 L456,432 L494,440" fill="none" stroke="#374766" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="456" cy="432" r="4" fill="#ffb454"/>
+            <circle cx="494" cy="440" r="3.5" fill="#ffb454"/>
+            <!-- Lamp Shade (conical bell shining downward right) -->
+            <path d="M488,430 L514,438 L502,465 L476,457 Z" fill="#1f293d" stroke="#5b6f94" stroke-width="1.4"/>
+            <polygon points="480,456 498,462 510,440 492,434" fill="#ffeaa7" opacity="0.95"/>
+            <!-- Lamp Bulb ("lamb light") -->
+            <circle class="lamp-bulb" cx="492" cy="452" r="7.5" fill="url(#lampbulb)"/>
+            <circle class="lamp-glow-ring" cx="492" cy="452" r="14" fill="#ffb833" opacity="0.4" filter="url(#b3)"/>
+          </g>
+
+          <!-- right speaker -->
+          <rect x="1250" y="450" width="44" height="70" rx="10" fill="#252b3f" stroke="#8f9db5" stroke-width="2"/>
+          <g fill="#78e0cc"><rect class="eq e3" x="1258" y="472" width="5" height="30"/><rect class="eq e4" x="1266" y="472" width="5" height="30"/><rect class="eq e1" x="1274" y="472" width="5" height="30"/><rect class="eq e2" x="1282" y="472" width="5" height="30"/></g>
+          <circle cx="1272" cy="460" r="4" fill="#3b4568"/>
+
+          <!-- monitor -->
+          <ellipse cx="1010" cy="515" rx="72" ry="10" fill="#10162a" opacity=".35" filter="url(#b3)"/>
+          <ellipse cx="1010" cy="512" rx="68" ry="9" fill="#222a42"/>
+          <rect x="995" y="465" width="30" height="48" fill="#222a42"/>
+          <rect x="790" y="200" width="440" height="280" rx="9" fill="#12182c" stroke="#8f9db5" stroke-width="2"/>
+          <rect x="802" y="212" width="416" height="256" rx="3" fill="#1e2433"/>
+
+          <g clip-path="url(#screenclip)">
+            <rect x="802" y="212" width="416" height="16" fill="#2a3144"/>
+            <circle cx="814" cy="220" r="3" fill="#ff6b6b"/><circle cx="824" cy="220" r="3" fill="#ffd25e"/><circle cx="834" cy="220" r="3" fill="#6ee7a8"/>
+            <text id="ttl" x="1010" y="223" text-anchor="middle" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="8" fill="#9aa5bd">player.js - Hostel Radio</text>
+            <rect x="802" y="228" width="416" height="16" fill="#232a3c"/>
+            <rect x="834" y="228" width="84" height="16" fill="#1e2433"/><rect x="834" y="242" width="84" height="2" fill="#ffb454"/>
+            <text id="tab" x="842" y="239" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="8.4" fill="#f3eee4">player.js</text>
+            <rect x="802" y="244" width="28" height="208" fill="#181d2b"/>
+            <rect x="810" y="254" width="12" height="9" rx="1.5" fill="#78e0cc"/><rect x="810" y="270" width="12" height="9" rx="1.5" fill="#3b4568"/><rect x="810" y="286" width="12" height="9" rx="1.5" fill="#3b4568"/><rect x="810" y="302" width="12" height="9" rx="1.5" fill="#3b4568"/>
+            <rect x="1198" y="244" width="20" height="208" fill="#232a3c"/>
+            <g fill="#3b4568"><rect x="1203" y="252" width="10" height="2.4"/><rect x="1203" y="260" width="7" height="2.4"/><rect x="1203" y="268" width="10" height="2.4"/><rect x="1203" y="276" width="8" height="2.4"/><rect x="1203" y="284" width="9" height="2.4"/><rect x="1203" y="292" width="5" height="2.4"/><rect x="1203" y="300" width="9" height="2.4"/></g>
+            <g id="code"></g>
+            <rect class="cursor" id="cur" x="864" y="258" width="2.6" height="13" fill="#f3eee4"/>
+            <rect id="stbg" x="802" y="452" width="416" height="16" fill="#3b6fd0"/>
+            <text id="st" x="812" y="463" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="8" fill="#ffffff">main    typing...</text>
+            <text x="1210" y="463" text-anchor="end" font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="8" fill="#dbe6ff">JavaScript   UTF-8</text>
+            <polygon points="802,212 960,212 802,330" fill="#fff" opacity=".035"/>
+          </g>
+          <rect x="782" y="206" width="14" height="14" fill="#ffe27a" transform="rotate(-8 789 213)"/>
+          <rect x="1222" y="340" width="12" height="12" fill="#e87a90" transform="rotate(10 1228 346)"/>
+
+          <!-- desk mat under keyboard and mouse -->
+          <rect x="770" y="528" width="290" height="48" rx="6" fill="#181e2e" stroke="#2c354d" stroke-width="1.5" opacity=".7"/>
+
+          <!-- keyboard -->
+          <polygon points="790,566 810,534 980,534 1000,566" fill="#10162a" opacity=".25" transform="translate(0 4)" filter="url(#b3)"/>
+          <polygon points="790,566 810,534 980,534 1000,566" fill="#e6ebf3" stroke="#98a6bc" stroke-width="1.2"/>
+          <g stroke="#a9b6ca" stroke-width="1.2">
+            <line x1="800" y1="550" x2="990" y2="550"/>
+            <line x1="805" y1="542" x2="985" y2="542"/>
+            <line x1="795" y1="558" x2="995" y2="558"/>
+            <line x1="880" y1="534" x2="870" y2="566"/>
+            <line x1="940" y1="534" x2="936" y2="566"/>
+          </g>
+
+          <!-- mouse -->
+          <ellipse cx="1025" cy="552" rx="14" ry="10" fill="#e6ebf3" stroke="#98a6bc" stroke-width="1.2"/>
+
+          <!-- chai -->
+          <ellipse cx="1080" cy="556" rx="18" ry="4.5" fill="#cfc6b4"/>
+          <rect x="1071" y="522" width="20" height="32" rx="3.5" fill="#ffffff" fill-opacity=".35" stroke="#b9b09c" stroke-width="1.5"/>
+          <rect x="1073" y="533" width="16" height="19" rx="2.5" fill="#b4743a"/><rect x="1073" y="533" width="16" height="3.5" rx="1.5" fill="#d8a56a"/>
+          <path class="steam s1" d="M1076,518 q-4,-7 0,-13 q4,-6 0,-12"/><path class="steam s2" d="M1081,518 q-4,-7 0,-13 q4,-6 0,-12"/><path class="steam s3" d="M1086,518 q-4,-7 0,-13 q4,-6 0,-12"/>
+
+          <!-- notebook + pen (FOCUSED BY RIGHT DESK STUDY LAMP) -->
+          <g class="paper-pen-group" id="paper-pen-group">
+            <polygon points="1130,580 1150,544 1220,544 1200,580" fill="#fffaf0" stroke="#c9b98e" stroke-width="1.2"/>
+            <g stroke="#a9b6ca" stroke-width="1">
+              <line x1="1144" y1="555" x2="1208" y2="555"/>
+              <line x1="1140" y1="562" x2="1204" y2="562"/>
+              <line x1="1136" y1="569" x2="1200" y2="569"/>
+            </g>
+            <!-- Blue Pen resting on paper -->
+            <line x1="1175" y1="586" x2="1225" y2="554" stroke="#3d6fb0" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="1175" cy="586" r="1.5" fill="#a0b4cf"/>
+            <line x1="1212" y1="562" x2="1220" y2="556" stroke="#c4d1e2" stroke-width="1.8" stroke-linecap="round"/>
+          </g>
+
+          <!-- RIGHT DESK STUDY LAMP ("right side lamb") Focused Directly on Paper and Pen -->
+          <g class="desk-lamp-right" id="desk-lamp-right" title="Click to toggle right study lamp">
+            <!-- Focused Light Beam Cone shining directly on paper & pen (turns ON in Dark Mode) -->
+            <g class="lamp-beam-paper-wrap" id="lamp-beam-paper-wrap">
+              <polygon class="lamp-beam-paper" points="1188,456 1226,474 1260,582 1090,605" fill="url(#lampbeam-paper)" style="mix-blend-mode:screen; pointer-events:none;"/>
+              <ellipse class="paper-light-pool" cx="1175" cy="565" rx="72" ry="28" fill="url(#paperglow)" style="mix-blend-mode:screen; pointer-events:none;"/>
+              <ellipse cx="1175" cy="565" rx="94" ry="36" fill="url(#paperglow)" opacity="0.5" style="mix-blend-mode:screen; pointer-events:none;"/>
+            </g>
+            <!-- Lamp Base on desk -->
+            <ellipse cx="1265" cy="522" rx="24" ry="5.5" fill="#1b2336" stroke="#3b4a68" stroke-width="1.4"/>
+            <rect x="1261" y="514" width="8" height="9" rx="2" fill="#2d3954"/>
+            <!-- Articulated Metal Arm reaching over toward notebook -->
+            <path d="M1265,520 L1278,452 L1222,428" fill="none" stroke="#2f3b54" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="1278" cy="452" r="3.5" fill="#ffb454"/>
+            <circle cx="1222" cy="428" r="3.5" fill="#ffb454"/>
+            <!-- Lamp Shade (bell angled down-left directly facing the paper & pen) -->
+            <path d="M1214,422 L1230,434 L1226,474 L1188,456 Z" fill="#252f48" stroke="#3d4d6e" stroke-width="1.2"/>
+            <polygon points="1188,456 1226,474 1220,466 1194,450" fill="#ffeaa7" opacity="0.95"/>
+            <!-- Lamp Bulb ("lamb light") -->
+            <circle class="lamp-bulb-right" cx="1207" cy="465" r="7.5" fill="url(#lampbulb)"/>
+            <circle class="lamp-glow-ring-right" cx="1207" cy="465" r="16" fill="#ffb833" opacity="0.4" filter="url(#b3)"/>
+          </g>
+
+          <!-- books + bottle (illuminated under the right lamp) -->
+          <g class="books-stack" id="books-stack">
+            <rect x="1340" y="524" width="76" height="18" rx="2" fill="#3d6fb0"/>
+            <rect x="1346" y="506" width="66" height="18" rx="2" fill="#e6b04a"/>
+            <rect x="1352" y="490" width="56" height="16" rx="2" fill="#c4566a"/>
+          </g>
+          <rect x="1440" y="448" width="28" height="86" rx="10" fill="#6fb6e8" opacity=".85"/><rect x="1447" y="430" width="14" height="20" rx="4" fill="#3d6fb0"/><rect x="1443" y="480" width="22" height="24" fill="#fff" opacity=".5"/>
+        </g>
+
+        <!-- ================= FOREGROUND: the developer ================= -->
+        <g class="l l-fg">
+          <!-- Floor shadow under chair and wheels -->
+          <ellipse cx="550" cy="800" rx="160" ry="20" fill="#0b1020" opacity=".28" filter="url(#b16)"/>
+          <ellipse cx="730" cy="800" rx="75" ry="14" fill="#0b1020" opacity=".24" filter="url(#b16)"/>
+
+          <!-- Developer Character (The user's human developer sitting at desk) -->
+          <g class="developer-char" id="developer-char">
+            <image href="developer_human.png" x="460" y="335" width="360" height="468" preserveAspectRatio="none"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- ================= LIGHT + FILM OVERLAY ================= -->
+      <rect width="1600" height="800" fill="url(#washg)"/>
+      <rect width="1600" height="800" filter="url(#grain)" opacity=".06"/>
+      <rect width="1600" height="800" fill="url(#vig)"/>
+    </svg>
+
+    <!-- Top floating bar -->
+    <div class="bar">
+      <div class="bar-l">
+        <span class="pill"><span id="clk">--:--</span></span>
+        <span class="pill status"><span class="dot"></span>build passing</span>
+      </div>
+      <div class="bar-r">
+        <button type="button" class="pill act" id="btn-theme" aria-label="Toggle Night/Day Mode" title="Toggle Dark/Night Mode">
+          <span id="theme-icon">🌙</span>
+          <span id="theme-text">Night</span>
+        </button>
+        <a href="https://open.spotify.com/playlist/2AVjI8Z57bqMJVtU3V9X1Q" target="_blank" rel="noopener noreferrer" class="pill act" id="sp-top-link" title="Open active playlist on Spotify">
+          <svg width="13" height="13" viewBox="0 0 24 24" style="margin-right: 4px; vertical-align: -2px;"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify
+        </a>
+        <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="pill act pill-powered" id="btn-portfolio" title="Powered by Raghab (raghabportfolio.in)">
+          <span style="color:#ffd25e;">⚡</span>
+          <span>raghabportfolio.in</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Title -->
+    <div class="title-block">
+      <h1>Developer&rsquo;s Room</h1>
+      <p class="sub">Hostel lo-fi radio &middot; <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="sub-credit" title="Powered by Raghab Portfolio">Powered by raghabportfolio.in</a></p>
+    </div>
+  </section>
+
+  <!-- Interactive toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<!-- Player Dock — Indian Barber Shop Bangers Complete Song Player -->
+<div class="dock" id="dock">
+  <div class="player-card" id="player-card">
+    <!-- Top Bar -->
+    <div class="player-topbar">
+      <div class="p-brand">
+        <svg class="sp-logo" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+        <div class="p-meta">
+          <span class="p-tag"><span class="live-dot"></span>FULL SONGS · NO 30S CUTOFF</span>
+          <span class="p-playlist-name" id="p-playlist-name">Indian Barber Shop Bangers</span>
+        </div>
+      </div>
+      <div class="p-controls-top">
+        <button type="button" class="sp-btn sp-btn-switch" id="btn-switch-playlist" aria-label="Switch Playlist" title="Switch Playlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" style="margin-right: 4px; vertical-align: -1px;"><path fill="currentColor" d="m19 8-4-4v3H5v2h10v3l4-4zM5 16l4 4v-3h10v-2H9v-3l-4 4z"/></svg>
+          <span id="switch-btn-label">Bast ✨</span>
+        </button>
+        <button type="button" class="sp-btn" id="btn-playlist-toggle" aria-label="Toggle playlist drawer">
+          <span id="playlist-btn-label">☰ 20 Songs</span>
+        </button>
+        <a href="https://open.spotify.com/playlist/2AVjI8Z57bqMJVtU3V9X1Q" target="_blank" rel="noopener noreferrer" class="sp-btn sp-open" id="sp-card-link" title="Open this playlist in Spotify App">
+          Spotify ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Active Song Main Controls -->
+    <div class="player-main">
+      <!-- Side Rolling Cassette Deck with Song Highlight Image -->
+      <div class="cassette-deck" id="cassette-deck" title="Side Rolling Cassette · Barber Shop Bangers">
+        <div class="cassette-body">
+          <div class="cassette-label">
+            <img id="cassette-img" class="cassette-art" src="https://img.youtube.com/vi/asVkFSVdJPo/mqdefault.jpg" alt="Song Highlight Image" loading="lazy">
+            <div class="cassette-overlay">
+              <span class="cassette-side">SIDE A</span>
+              <span class="cassette-badge">CASSETTE</span>
+            </div>
+          </div>
+          <div class="cassette-window">
+            <div class="cassette-spool spool-left" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="spool-svg"><path fill="#e2eaf8" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a6 6 0 1 1-6 6 6 6 0 0 1 6-6zm0 2a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm-1 2h2v4h-2z"/></svg>
+            </div>
+            <div class="cassette-tape-bridge">
+              <span class="tape-ribbon"></span>
+            </div>
+            <div class="cassette-spool spool-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="spool-svg"><path fill="#e2eaf8" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4a6 6 0 1 1-6 6 6 6 0 0 1 6-6zm0 2a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm-1 2h2v4h-2z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-info">
+        <div class="p-now">
+          <span class="p-title" id="t-title">Mujhse Mohabbat Ka</span>
+          <span class="p-artist" id="t-artist">Kumar Sanu, Alka Yagnik</span>
+        </div>
+
+        <div class="p-progress-row">
+          <span class="p-time" id="t-cur">0:00</span>
+          <div class="p-bar-wrap">
+            <input type="range" id="seek" min="0" max="100" value="0" step="0.1" aria-label="Seek track position">
+          </div>
+          <span class="p-time" id="t-tot">--:--</span>
+        </div>
+      </div>
+
+      <div class="p-actions">
+        <button type="button" class="p-act-btn" id="btn-prev" aria-label="Previous Song">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+        </button>
+        <button type="button" class="p-play-btn" id="btn-play" aria-label="Play song">
+          <svg class="ico-play" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+          <svg class="ico-pause" width="22" height="22" viewBox="0 0 24 24" style="display:none;"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button type="button" class="p-act-btn" id="btn-next" aria-label="Next Song">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m6 18 8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Expandable Playlist Drawer (Both Playlists supported) -->
+    <div class="playlist-drawer" id="playlist-drawer">
+      <div class="drawer-header">
+        <div class="drawer-tabs">
+          <button type="button" class="d-tab is-active" id="tab-pl-1" aria-label="Switch to Indian Barber Shop Bangers">Barber Shop (20)</button>
+          <button type="button" class="d-tab" id="tab-pl-2" aria-label="Switch to Bast playlist">Bast · Raghab (13)</button>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawer-close" aria-label="Close track list">✕</button>
+      </div>
+      <div class="playlist-list" id="playlist-list">
+        <!-- Rendered by script.js -->
+      </div>
+      <div class="drawer-footer">
+        <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="powered-by-link">
+          ⚡ Powered by raghabportfolio.in
+        </a>
+      </div>
+    </div>
+
+    <!-- YouTube audio engine container (positioned safely for iOS Safari and Android Chrome continuous playback) -->
+    <div id="yt-container" style="position: absolute; right: 0; bottom: 0; width: 200px; height: 120px; opacity: 0.001; pointer-events: none; z-index: -1; overflow: hidden;">
+      <div id="yt-player"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

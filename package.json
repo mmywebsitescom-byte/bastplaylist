@@ -1,0 +1,25 @@
+{
+  "name": "developers-room-hostel-radio",
+  "version": "1.0.0",
+  "description": "Developer's Room - Hostel Lo-Fi Radio with Barber Shop Bangers and Bast playlists",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static assets ready for deployment'",
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "keywords": [
+    "hostel",
+    "lo-fi",
+    "radio",
+    "spotify",
+    "developer",
+    "dark-mode",
+    "glassmorphism"
+  ],
+  "author": "Raghab Barik",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

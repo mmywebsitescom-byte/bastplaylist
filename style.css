@@ -1,0 +1,1697 @@
+/* ==========================================================================
+   Developer's Room - Stylesheet
+   Theme: Warm, sunlit hostel lo-fi room with over-the-shoulder editor
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+  --paper: #f3f6fb;
+  --wall: #e4ebf4;
+  --ink: #1b2335;
+  --muted: #59678a;
+  --amber: #e08a14;
+  --amber-deep: #b3600a;
+  --teal: #1fa98c;
+  --rose: #d9526e;
+  --line: rgba(27, 35, 53, 0.15);
+  --glass: rgba(255, 255, 255, 0.78);
+  --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Figtree', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #10162a;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  position: fixed;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button,
+a {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* Full-bleed page wrapper */
+.wrap {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Hero Stage — Full bleed, fills the entire viewport
+   ========================================================================== */
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--wall);
+  isolation: isolate;
+}
+
+.stage>svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: settle 2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Parallax depth layers */
+.l {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.l-bg {
+  transform: translate(calc(var(--mx, 0) * -8px), calc(var(--my, 0) * -4px));
+}
+
+.l-mid {
+  transform: translate(calc(var(--mx, 0) * -3px), calc(var(--my, 0) * -2px));
+}
+
+.l-fg {
+  transform: translate(calc(var(--mx, 0) * 5px), calc(var(--my, 0) * 3px));
+}
+
+.cam {
+  transform-box: view-box;
+  transform-origin: 50% 55%;
+  animation: push 26s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   Header Bar (Top pills: time, build status, actions)
+   ========================================================================== */
+.bar {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.bar-l,
+.bar-r {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  font: 500 0.75rem/1.2 var(--mono);
+  color: var(--ink);
+  pointer-events: auto;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.pill.act {
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.pill.act:hover {
+  background: rgba(224, 138, 20, 0.2);
+  border-color: rgba(224, 138, 20, 0.55);
+}
+
+.pill.act:active {
+  transform: scale(0.96);
+}
+
+.pill-powered {
+  border-color: rgba(255, 210, 94, 0.45);
+  background: rgba(255, 210, 94, 0.14);
+  color: #3d2f10;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pill-powered:hover {
+  background: rgba(255, 210, 94, 0.28);
+  border-color: rgba(255, 210, 94, 0.75);
+  box-shadow: 0 0 10px rgba(255, 210, 94, 0.35);
+  color: #1a1506;
+}
+
+.dark-mode .pill-powered {
+  background: rgba(255, 210, 94, 0.16);
+  border-color: rgba(255, 210, 94, 0.45);
+  color: #ffea9f;
+}
+
+.dark-mode .pill-powered:hover {
+  background: rgba(255, 210, 94, 0.3);
+  border-color: rgba(255, 210, 94, 0.8);
+  box-shadow: 0 0 12px rgba(255, 210, 94, 0.45);
+  color: #ffffff;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 7px var(--teal);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+#clk {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .pill.status {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Hero Title Block
+   ========================================================================== */
+.title-block {
+  position: absolute;
+  left: 50%;
+  top: 9%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+  width: max-content;
+  max-width: 92%;
+  animation: rise 1s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.4vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95);
+  text-wrap: balance;
+}
+
+.sub {
+  margin: 0.35rem 0 0;
+  padding-left: 0.36em;
+  font: 500 clamp(0.55rem, 0.85vw, 0.72rem)/1.2 var(--mono);
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(27, 35, 53, 0.8);
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
+}
+
+.sub-credit {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: color 0.15s, border-color 0.15s;
+  pointer-events: auto;
+  letter-spacing: 0.15em;
+}
+
+.sub-credit:hover {
+  color: #ffd25e;
+  border-color: #ffd25e;
+}
+
+/* ==========================================================================
+/* ==========================================================================
+   Dock — Fixed bottom-center Barber Shop Bangers Complete Song Player
+   ========================================================================== */
+.dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+  pointer-events: none;
+  animation: lift 0.9s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* True Frosted Glassmorphism Player Card */
+.player-card {
+  pointer-events: auto;
+  width: min(580px, calc(100vw - 20px));
+  background: rgba(14, 21, 38, 0.65);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  backdrop-filter: blur(28px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.38);
+  border-radius: 20px;
+  box-shadow: 
+    0 18px 46px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+  position: relative;
+}
+
+/* Glass specular sheen across top border */
+.player-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 30%, rgba(29, 185, 84, 0.85) 65%, transparent 100%);
+  pointer-events: none;
+}
+
+.player-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 8px;
+}
+
+.p-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.sp-logo {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.p-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.p-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 700 0.58rem/1 var(--mono);
+  color: #1DB954;
+  letter-spacing: 0.1em;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1DB954;
+  box-shadow: 0 0 8px #1DB954;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.p-playlist-name {
+  font: 600 0.78rem/1.2 var(--body);
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.p-controls-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #e2eaf8;
+  font: 500 0.7rem/1 var(--mono);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+  min-height: 28px;
+}
+
+.sp-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.sp-btn:active {
+  transform: scale(0.95);
+}
+
+.sp-btn.sp-open {
+  background: rgba(29, 185, 84, 0.24);
+  border-color: rgba(29, 185, 84, 0.55);
+  color: #4eed84;
+}
+
+.sp-btn.sp-open:hover {
+  background: rgba(29, 185, 84, 0.38);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.4);
+}
+
+.sp-btn.sp-btn-switch {
+  background: rgba(255, 180, 84, 0.16);
+  border-color: rgba(255, 180, 84, 0.45);
+  color: #ffd9a0;
+  font-weight: 600;
+}
+
+.sp-btn.sp-btn-switch:hover {
+  background: rgba(255, 180, 84, 0.3);
+  border-color: rgba(255, 180, 84, 0.7);
+  box-shadow: 0 0 10px rgba(255, 180, 84, 0.35);
+  color: #ffffff;
+}
+
+/* Active Song Main Body */
+.player-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+/* ==========================================================================
+   Side Rolling Cassette Deck with Song Highlight Image ("casid")
+   ========================================================================== */
+.cassette-deck {
+  flex-shrink: 0;
+  width: 104px;
+  height: 64px;
+  background: linear-gradient(135deg, #1e2638 0%, #101524 60%, #090d18 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.cassette-deck:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.cassette-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Upper label displaying the song's highlight movie image */
+.cassette-label {
+  height: 38px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.6);
+}
+
+.cassette-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.cassette-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.72) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 2px 5px;
+  pointer-events: none;
+}
+
+.cassette-side {
+  font: 700 0.55rem/1 var(--mono);
+  color: #ffb454;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.cassette-badge {
+  font: 700 0.5rem/1 var(--mono);
+  color: #1DB954;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Lower acrylic window with 2 rolling cassette reels/spools */
+.cassette-window {
+  height: 26px;
+  background: rgba(6, 9, 16, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.cassette-spool {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #141a26;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px #2d3850, 0 0 0 4px #0d121c; /* Simulated magnetic tape wound around spool */
+  position: relative;
+  z-index: 2;
+}
+
+.spool-svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Continuous rolling animation while playing */
+.is-playing .cassette-spool {
+  animation: rollCassette 2.4s linear infinite;
+}
+
+@keyframes rollCassette {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.cassette-tape-bridge {
+  flex-grow: 1;
+  height: 3px;
+  background: #2b1f18; /* Magnetic tape ribbon */
+  margin: 0 4px;
+  position: relative;
+  border-radius: 1px;
+}
+
+.tape-ribbon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #3d2a20 0%, #5a3e2e 50%, #3d2a20 100%);
+}
+
+.is-playing .tape-ribbon {
+  background: linear-gradient(90deg, #4d3528 0%, #73503b 50%, #4d3528 100%);
+  animation: ribbonPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes ribbonPulse {
+  from { opacity: 0.75; }
+  to { opacity: 1; }
+}
+
+.p-info {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.p-now {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.p-title {
+  font: 700 0.88rem/1.2 var(--body);
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.p-artist {
+  font: 500 0.72rem/1.2 var(--body);
+  color: #9cb0d0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.p-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.p-time {
+  font: 500 0.68rem/1 var(--mono);
+  color: #8397b8;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  min-width: 28px;
+}
+
+.p-bar-wrap {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#seek {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  touch-action: manipulation;
+}
+
+#seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1DB954;
+  box-shadow: 0 0 6px rgba(29, 185, 84, 0.8);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+#seek::-webkit-slider-thumb:hover,
+#seek:active::-webkit-slider-thumb {
+  transform: scale(1.3);
+}
+
+#seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #1DB954;
+  cursor: pointer;
+}
+
+.p-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.p-act-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b0c4e4;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+
+.p-act-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.p-act-btn:active {
+  transform: scale(0.92);
+}
+
+.p-play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1DB954, #159442);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(29, 185, 84, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.p-play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px rgba(29, 185, 84, 0.7);
+}
+
+.p-play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Playlist Drawer (All 20 songs) */
+.playlist-drawer {
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(10, 14, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: max-height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.player-card.is-drawer-open .playlist-drawer {
+  max-height: 290px;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font: 600 0.72rem/1 var(--mono);
+  color: #8da4ca;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  gap: 8px;
+}
+
+.drawer-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.d-tab {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #9cb0d0;
+  font: 600 0.68rem/1 var(--mono);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.d-tab:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.d-tab.is-active {
+  background: rgba(29, 185, 84, 0.28);
+  border-color: rgba(29, 185, 84, 0.65);
+  color: #4eed84;
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.35);
+}
+
+.drawer-close-btn {
+  background: none;
+  border: none;
+  color: #8da4ca;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.drawer-close-btn:hover {
+  color: #fff;
+}
+
+.playlist-list {
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 4px 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.playlist-list::-webkit-scrollbar {
+  width: 5px;
+}
+.playlist-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+}
+
+.p-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.p-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.p-item.is-active {
+  background: rgba(29, 185, 84, 0.18);
+  border-left: 3px solid #1DB954;
+}
+
+.p-item-num {
+  font: 600 0.7rem/1 var(--mono);
+  color: #6a7d9e;
+  width: 18px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.p-item.is-active .p-item-num {
+  color: #1DB954;
+}
+
+.p-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex-grow: 1;
+}
+
+.p-item-t {
+  font: 600 0.8rem/1.2 var(--body);
+  color: #e2eaf8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.p-item.is-active .p-item-t {
+  color: #4eed84;
+}
+
+.p-item-a {
+  font: 400 0.68rem/1.2 var(--body);
+  color: #8295b2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.p-item-thumb {
+  width: 48px;
+  height: 32px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: block;
+}
+
+.drawer-footer {
+  padding: 8px 14px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.powered-by-link {
+  font: 500 0.68rem/1 var(--mono);
+  color: #9cb0d0;
+  text-decoration: none;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+
+.powered-by-link:hover {
+  color: #ffd25e;
+  text-shadow: 0 0 8px rgba(255, 210, 94, 0.5);
+}
+
+/* ==========================================================================
+   DESK STUDY LAMP ("lamb light") Styles
+   ========================================================================== */
+.desk-lamp {
+  cursor: pointer;
+}
+
+.desk-lamp .lamp-beam-wrap {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.desk-lamp .lamp-bulb {
+  transition: all 0.5s ease;
+  fill: #ffdf94;
+}
+
+.desk-lamp .lamp-glow-ring {
+  opacity: 0.15;
+  transition: opacity 0.5s ease;
+}
+
+/* In Dark Mode, Desk Lamp ("lamb light") is ON */
+.dark-mode .desk-lamp .lamp-beam-wrap {
+  opacity: 0.96;
+}
+
+.dark-mode .desk-lamp .lamp-beam {
+  animation: lampBeamShimmer 5s ease-in-out infinite alternate;
+}
+
+.dark-mode .desk-lamp .lamp-pool {
+  opacity: 0.95;
+  animation: lampPoolPulse 4s ease-in-out infinite alternate;
+}
+
+.dark-mode .desk-lamp .lamp-bulb {
+  fill: url(#lampbulb) !important;
+  filter: drop-shadow(0 0 12px #ffe57a) drop-shadow(0 0 26px #ff9e22);
+  animation: bulbPulse 3s ease-in-out infinite;
+}
+
+.dark-mode .desk-lamp .lamp-glow-ring {
+  opacity: 0.88;
+}
+
+@keyframes lampBeamShimmer {
+  0% { opacity: 0.88; }
+  50% { opacity: 0.98; }
+  100% { opacity: 0.92; }
+}
+
+@keyframes lampPoolPulse {
+  0% { opacity: 0.88; }
+  50% { opacity: 1; }
+  100% { opacity: 0.92; }
+}
+
+@keyframes bulbPulse {
+  0%, 100% { filter: drop-shadow(0 0 10px #ffe57a) drop-shadow(0 0 24px #ff9e22); }
+  50% { filter: drop-shadow(0 0 15px #ffffff) drop-shadow(0 0 34px #ffa633); }
+}
+
+/* ==========================================================================
+   RIGHT DESK STUDY LAMP ("right side lamb") Focused on Books
+   ========================================================================== */
+.desk-lamp-right {
+  cursor: pointer;
+}
+
+.desk-lamp-right .lamp-beam-books-wrap {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.desk-lamp-right .lamp-bulb-right {
+  transition: all 0.5s ease;
+  fill: #ffe3a8;
+}
+
+.desk-lamp-right .lamp-glow-ring-right {
+  opacity: 0.12;
+  transition: opacity 0.5s ease;
+}
+
+/* In Dark Mode, Right Desk Lamp is ON and FOCUSED ON BOOKS */
+.dark-mode .desk-lamp-right .lamp-beam-books-wrap {
+  opacity: 0.98;
+}
+
+.dark-mode .desk-lamp-right .lamp-beam-books {
+  animation: bookLampBeamShimmer 5s ease-in-out infinite alternate;
+}
+
+.dark-mode .desk-lamp-right .books-light-pool {
+  opacity: 1;
+  animation: bookPoolPulse 4s ease-in-out infinite alternate;
+}
+
+.dark-mode .desk-lamp-right .lamp-bulb-right {
+  fill: url(#lampbulb) !important;
+  filter: drop-shadow(0 0 14px #ffe57a) drop-shadow(0 0 28px #ff9e22);
+  animation: bulbPulse 3s ease-in-out infinite;
+}
+
+.dark-mode .desk-lamp-right .lamp-glow-ring-right {
+  opacity: 0.92;
+}
+
+.dark-mode .books-stack {
+  filter: drop-shadow(0 0 12px rgba(255, 205, 85, 0.55)) brightness(1.15);
+  transition: filter 0.5s ease;
+}
+
+@keyframes bookLampBeamShimmer {
+  0% { opacity: 0.88; }
+  50% { opacity: 1; }
+  100% { opacity: 0.92; }
+}
+
+@keyframes bookPoolPulse {
+  0% { opacity: 0.88; }
+  50% { opacity: 1; }
+  100% { opacity: 0.92; }
+}
+
+/* ==========================================================================
+   LICHU LIGHTS (Hostel Fairy String Lights) in Dark Mode
+   ========================================================================== */
+.dark-mode #lights path {
+  stroke: #455473;
+  stroke-width: 2.2;
+}
+
+.dark-mode #lights .tw {
+  animation: lichuTwinkle 2.5s ease-in-out infinite;
+}
+
+.dark-mode #lights .tw circle:nth-of-type(1) {
+  opacity: 0.65 !important;
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: blur(2px) drop-shadow(0 0 12px currentColor) drop-shadow(0 0 24px currentColor);
+  animation: lichuBloom 3s ease-in-out infinite alternate;
+}
+
+.dark-mode #lights .tw circle:nth-of-type(2) {
+  opacity: 0.92 !important;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.dark-mode #lights .tw ellipse {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 18px currentColor);
+}
+
+@keyframes lichuBloom {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0.9;
+  }
+}
+
+@keyframes lichuTwinkle {
+  0%, 100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.4);
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Room Ambiance (2 AM Hostel Developer Vibe)
+   ========================================================================== */
+body.dark-mode {
+  background: #080c16;
+}
+
+.dark-mode .stage {
+  background: #080c16;
+}
+
+.dark-mode .room-wall {
+  fill: url(#nightwall) !important;
+  transition: fill 0.6s ease;
+}
+
+.dark-mode .room-floor {
+  fill: url(#nightfloor) !important;
+  transition: fill 0.6s ease;
+}
+
+.dark-mode .window-sky {
+  fill: url(#nightsky) !important;
+  transition: fill 0.6s ease;
+}
+
+.dark-mode .celestial-body {
+  cx: 1440;
+  cy: 192;
+  r: 48;
+  fill: #8fc2ff;
+  opacity: 0.22;
+  filter: url(#b8);
+  transition: all 0.6s ease;
+}
+
+.dark-mode .celestial-core {
+  cx: 1440;
+  cy: 192;
+  r: 22;
+  fill: #f4f8ff;
+  filter: drop-shadow(0 0 14px #9ecbf7);
+  transition: all 0.6s ease;
+}
+
+.night-stars {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dark-mode .night-stars {
+  opacity: 1;
+}
+
+.dark-mode .clouds {
+  opacity: 0.22;
+  transition: opacity 0.6s ease;
+}
+
+.dark-mode .sunbeam {
+  opacity: 0 !important;
+  transition: opacity 0.6s ease;
+}
+
+.dark-mode .screenglow {
+  opacity: 0.92;
+  filter: drop-shadow(0 0 24px rgba(100, 180, 255, 0.65));
+}
+
+.dark-mode svg rect[fill="url(#washg)"] {
+  fill: #060913;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+  transition: opacity 0.6s ease;
+}
+
+.dark-mode svg rect[fill="url(#vig)"] {
+  opacity: 0.68;
+}
+
+.dark-mode .curtain {
+  opacity: 0.6;
+}
+
+.dark-mode .developer-char {
+  filter: drop-shadow(-4px 0 18px rgba(255, 180, 50, 0.28));
+  transition: filter 0.6s ease;
+}
+
+.dark-mode .pill {
+  background: rgba(18, 25, 42, 0.82);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #e2eaf8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .pill.act:hover {
+  background: rgba(29, 185, 84, 0.25);
+  border-color: rgba(29, 185, 84, 0.6);
+}
+
+.dark-mode .title-block h1 {
+  color: #f0f4ff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 0 35px rgba(29, 185, 84, 0.2);
+}
+
+.dark-mode .title-block .sub {
+  color: #a0b3d6;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+}
+
+/* ==========================================================================
+   Enhanced Glassmorphism for Song Play Controls in Dark Mode
+   ========================================================================== */
+.dark-mode .player-card {
+  background: rgba(10, 16, 30, 0.74);
+  border-color: rgba(255, 255, 255, 0.22);
+  border-top-color: rgba(255, 255, 255, 0.48);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.78),
+    0 0 30px rgba(29, 185, 84, 0.16),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .playlist-drawer {
+  background: rgba(8, 12, 24, 0.9);
+}
+
+/* ==========================================================================
+   Mobile (Android and iOS) Responsive Queries
+   ========================================================================== */
+@media (max-width: 680px) {
+  .title-block {
+    top: max(48px, calc(env(safe-area-inset-top) + 36px));
+  }
+
+  h1 {
+    font-size: clamp(1.2rem, 5.2vw, 1.55rem);
+  }
+
+  .sub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+  }
+
+  .pill.status {
+    display: none;
+  }
+
+  .bar-r {
+    gap: 6px;
+  }
+
+  .pill {
+    padding: 0.28rem 0.65rem;
+    font-size: 0.7rem;
+  }
+
+  .player-card {
+    width: calc(100vw - 16px);
+    border-radius: 16px;
+  }
+
+  .player-main {
+    padding: 8px 10px;
+    gap: 9px;
+  }
+
+  .cassette-deck {
+    width: 88px;
+    height: 56px;
+  }
+
+  .cassette-label {
+    height: 32px;
+  }
+
+  .cassette-window {
+    height: 23px;
+    padding: 0 8px;
+  }
+
+  .cassette-spool {
+    width: 15px;
+    height: 15px;
+  }
+
+  .spool-svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .p-play-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .p-act-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .player-card.is-drawer-open .playlist-drawer {
+    max-height: 250px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .title-block {
+    top: max(6px, env(safe-area-inset-top));
+    left: 20%;
+    transform: none;
+    text-align: left;
+  }
+
+  .title-block h1 {
+    font-size: 1.05rem;
+  }
+
+  .title-block .sub {
+    font-size: 0.52rem;
+  }
+
+  .dock {
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+
+  .player-card {
+    width: min(480px, calc(100vw - 20px));
+  }
+
+  .player-main {
+    padding: 6px 10px;
+  }
+
+  .player-card.is-drawer-open .playlist-drawer {
+    max-height: 150px;
+  }
+}
+
+/* ==========================================================================
+   Toast Notification (Modern pill notification)
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  background: rgba(22, 28, 42, 0.94);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  z-index: 999;
+  white-space: nowrap;
+  max-width: 90vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   Scene Animation Keyframes
+   ========================================================================== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes steam {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+}
+
+@keyframes eq {
+
+  0%,
+  100% {
+    transform: scaleY(0.2);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes lift {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes push {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-40px);
+  }
+
+  to {
+    transform: translateX(50px);
+  }
+}
+
+@keyframes sway {
+
+  0%,
+  100% {
+    transform: skewX(0);
+  }
+
+  50% {
+    transform: skewX(1.6deg);
+  }
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-1.4px) scale(1.004);
+  }
+}
+
+@keyframes headidle {
+
+  0%,
+  100% {
+    transform: rotate(-0.8deg);
+  }
+
+  50% {
+    transform: rotate(0.9deg) translateY(0.6px);
+  }
+}
+
+@keyframes bob {
+
+  0%,
+  100% {
+    transform: rotate(-2.2deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(2.2deg) translateY(2.4px);
+  }
+}
+
+@keyframes mote {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translate(16px, -22px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes beam {
+
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Specific animated scene classes */
+.tw {
+  animation: twinkle 3.4s ease-in-out infinite;
+}
+
+.cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+.steam {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: steam 3.4s ease-in infinite;
+}
+
+.steam.s2 {
+  animation-delay: -1.1s;
+}
+
+.steam.s3 {
+  animation-delay: -2.2s;
+}
+
+.eq {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0.25);
+  animation: eq 0.9s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.eq.e2 {
+  animation-delay: -0.25s;
+}
+
+.eq.e3 {
+  animation-delay: -0.5s;
+}
+
+.eq.e4 {
+  animation-delay: -0.7s;
+}
+
+.is-playing .eq {
+  animation-play-state: running;
+}
+
+.clouds {
+  animation: drift 36s ease-in-out infinite alternate;
+}
+
+.curtain {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: sway 7s ease-in-out infinite;
+}
+
+
+.torso {
+  transform-box: view-box;
+  transform-origin: 504px 640px;
+  animation: breathe 4.4s ease-in-out infinite;
+}
+
+.head {
+  transform-box: view-box;
+  transform-origin: 502px 452px;
+  animation: headidle 7s ease-in-out infinite;
+}
+
+.is-playing .head {
+  animation: bob 1.15s ease-in-out infinite;
+}
+
+.nudge {
+  transition: transform 0.07s ease-out;
+}
+
+.developer-char {
+  /* Developer is kept stable and grounded */
+  transform: none;
+}
+
+.sunbeam {
+  animation: beam 6s ease-in-out infinite;
+}
+
+.mote {
+  animation: mote 9s ease-in-out infinite alternate;
+}
+
+.screenglow {
+  animation: glow 3.2s ease-in-out infinite;
+}
+
+#code {
+  transition: opacity 0.5s;
+}
+
+/* ==========================================================================
+   Accessibility / Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .eq {
+    transform: scaleY(0.6);
+  }
+
+  .l {
+    transform: none !important;
+  }
+}
