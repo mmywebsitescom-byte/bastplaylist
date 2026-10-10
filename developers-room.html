@@ -418,34 +418,41 @@
             <path class="steam s2" d="M1081,518 q-4,-7 0,-13 q4,-6 0,-12" />
             <path class="steam s3" d="M1086,518 q-4,-7 0,-13 q4,-6 0,-12" />
 
-            <!-- notebook + pen -->
-            <polygon points="1130,580 1150,544 1220,544 1200,580" fill="#fffaf0" stroke="#c9b98e" stroke-width="1.2" />
-            <g stroke="#a9b6ca" stroke-width="1">
-              <line x1="1144" y1="555" x2="1208" y2="555" />
-              <line x1="1140" y1="562" x2="1204" y2="562" />
-              <line x1="1136" y1="569" x2="1200" y2="569" />
+            <!-- notebook + pen (FOCUSED BY RIGHT DESK STUDY LAMP) -->
+            <g class="paper-pen-group" id="paper-pen-group">
+              <polygon points="1130,580 1150,544 1220,544 1200,580" fill="#fffaf0" stroke="#c9b98e" stroke-width="1.2" />
+              <g stroke="#a9b6ca" stroke-width="1">
+                <line x1="1144" y1="555" x2="1208" y2="555" />
+                <line x1="1140" y1="562" x2="1204" y2="562" />
+                <line x1="1136" y1="569" x2="1200" y2="569" />
+              </g>
+              <!-- Blue Pen resting on paper -->
+              <line x1="1175" y1="586" x2="1225" y2="554" stroke="#3d6fb0" stroke-width="3.5" stroke-linecap="round" />
+              <circle cx="1175" cy="586" r="1.5" fill="#a0b4cf" />
+              <line x1="1212" y1="562" x2="1220" y2="556" stroke="#c4d1e2" stroke-width="1.8" stroke-linecap="round" />
             </g>
-            <line x1="1175" y1="586" x2="1225" y2="554" stroke="#3d6fb0" stroke-width="3.5" stroke-linecap="round" />
 
-            <!-- RIGHT DESK STUDY LAMP ("right side lamb") Focused on Books -->
+            <!-- RIGHT DESK STUDY LAMP ("right side lamb") Focused Directly on Paper and Pen -->
             <g class="desk-lamp-right" id="desk-lamp-right" title="Click to toggle right study lamp">
-              <!-- Focused Light Beam Cone shining directly on books (turns ON in Dark Mode) -->
-              <g class="lamp-beam-books-wrap" id="lamp-beam-books-wrap">
-                <polygon class="lamp-beam-books" points="1267,428 1315,558 1445,550 1425,482" fill="url(#lampbeam-books)" style="mix-blend-mode:screen; pointer-events:none;"/>
-                <ellipse class="books-light-pool" cx="1378" cy="514" rx="58" ry="32" fill="url(#booksglow)" style="mix-blend-mode:screen; pointer-events:none;"/>
-                <ellipse cx="1378" cy="542" rx="72" ry="14" fill="url(#booksglow)" opacity="0.6" style="mix-blend-mode:screen; pointer-events:none;"/>
+              <!-- Focused Light Beam Cone shining directly on paper & pen (turns ON in Dark Mode) -->
+              <g class="lamp-beam-paper-wrap" id="lamp-beam-paper-wrap">
+                <polygon class="lamp-beam-paper" points="1188,456 1226,474 1260,582 1090,605" fill="url(#lampbeam-paper)" style="mix-blend-mode:screen; pointer-events:none;"/>
+                <ellipse class="paper-light-pool" cx="1175" cy="565" rx="72" ry="28" fill="url(#paperglow)" style="mix-blend-mode:screen; pointer-events:none;"/>
+                <ellipse cx="1175" cy="565" rx="94" ry="36" fill="url(#paperglow)" opacity="0.5" style="mix-blend-mode:screen; pointer-events:none;"/>
               </g>
               <!-- Lamp Base on desk -->
-              <ellipse cx="1275" cy="522" rx="26" ry="5.5" fill="#222a42"/>
-              <!-- Articulated Metal Arm -->
-              <path d="M1275,520 L1300,456 L1264,405" fill="none" stroke="#2f3957" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="1300" cy="456" r="3.5" fill="#ffb454"/>
-              <!-- Lamp Shade (bell angled down-right towards the books) -->
-              <path d="M1236,408 L1278,390 L1290,424 L1246,435 Z" fill="#2f3957"/>
-              <polygon points="1248,432 1286,422 1276,400 1240,412" fill="#ffeaa7" opacity="0.95"/>
+              <ellipse cx="1265" cy="522" rx="24" ry="5.5" fill="#1b2336" stroke="#3b4a68" stroke-width="1.4"/>
+              <rect x="1261" y="514" width="8" height="9" rx="2" fill="#2d3954"/>
+              <!-- Articulated Metal Arm reaching over toward notebook -->
+              <path d="M1265,520 L1278,452 L1222,428" fill="none" stroke="#2f3b54" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="1278" cy="452" r="3.5" fill="#ffb454"/>
+              <circle cx="1222" cy="428" r="3.5" fill="#ffb454"/>
+              <!-- Lamp Shade (bell angled down-left directly facing the paper & pen) -->
+              <path d="M1214,422 L1230,434 L1226,474 L1188,456 Z" fill="#252f48" stroke="#3d4d6e" stroke-width="1.2"/>
+              <polygon points="1188,456 1226,474 1220,466 1194,450" fill="#ffeaa7" opacity="0.95"/>
               <!-- Lamp Bulb ("lamb light") -->
-              <circle class="lamp-bulb-right" cx="1267" cy="428" r="8" fill="url(#lampbulb)"/>
-              <circle class="lamp-glow-ring-right" cx="1267" cy="428" r="16" fill="#ffb833" opacity="0.4" filter="url(#b3)"/>
+              <circle class="lamp-bulb-right" cx="1207" cy="465" r="7.5" fill="url(#lampbulb)"/>
+              <circle class="lamp-glow-ring-right" cx="1207" cy="465" r="16" fill="#ffb833" opacity="0.4" filter="url(#b3)"/>
             </g>
 
             <!-- books + bottle (illuminated under the right lamp) -->
@@ -493,17 +500,19 @@
             <svg width="13" height="13" viewBox="0 0 24 24" style="margin-right: 4px; vertical-align: -2px;"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
             Spotify
           </a>
-          <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="pill act pill-powered" id="btn-portfolio" title="Powered by Raghab (raghabportfolio.in)">
-            <span style="color:#ffd25e;">⚡</span>
-            <span>raghabportfolio.in</span>
-          </a>
         </div>
       </div>
 
       <!-- Hero Title -->
       <div class="title-block">
         <h1>Developer&rsquo;s Room</h1>
-        <p class="sub">Hostel lo-fi radio &middot; <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="sub-credit" title="Powered by Raghab Portfolio">Powered by raghabportfolio.in</a></p>
+        <p class="sub">
+          <a href="https://www.raghabportfolio.in/" target="_blank" rel="noopener noreferrer" class="sub-link" title="Visit raghabportfolio.in">
+            <span>Hostel lo-fi radio</span>
+            <span class="sub-sep">&middot;</span>
+            <span class="sub-brand">Powered by raghabportfolio.in ↗</span>
+          </a>
+        </p>
       </div>
     </section>
 
@@ -612,6 +621,9 @@
           </a>
         </div>
       </div>
+
+      <!-- Persistent HTML5 Audio Player Engine for Background Playback (Keeps playing while browsing DevRoom or when screen is turned off) -->
+      <audio id="persistent-audio" preload="auto" playsinline webkit-playsinline></audio>
 
       <!-- YouTube audio engine container (positioned safely for iOS Safari and Android Chrome continuous playback) -->
       <div id="yt-container" style="position: absolute; right: 0; bottom: 0; width: 200px; height: 120px; opacity: 0.001; pointer-events: none; z-index: -1; overflow: hidden;">

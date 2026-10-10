@@ -169,34 +169,6 @@ a {
   transform: scale(0.96);
 }
 
-.pill-powered {
-  border-color: rgba(255, 210, 94, 0.45);
-  background: rgba(255, 210, 94, 0.14);
-  color: #3d2f10;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.pill-powered:hover {
-  background: rgba(255, 210, 94, 0.28);
-  border-color: rgba(255, 210, 94, 0.75);
-  box-shadow: 0 0 10px rgba(255, 210, 94, 0.35);
-  color: #1a1506;
-}
-
-.dark-mode .pill-powered {
-  background: rgba(255, 210, 94, 0.16);
-  border-color: rgba(255, 210, 94, 0.45);
-  color: #ffea9f;
-}
-
-.dark-mode .pill-powered:hover {
-  background: rgba(255, 210, 94, 0.3);
-  border-color: rgba(255, 210, 94, 0.8);
-  box-shadow: 0 0 12px rgba(255, 210, 94, 0.45);
-  color: #ffffff;
-}
-
 .dot {
   width: 7px;
   height: 7px;
@@ -217,7 +189,7 @@ a {
 }
 
 /* ==========================================================================
-   Hero Title Block
+   Hero Title Block & Centered Subtitle Line
    ========================================================================== */
 .title-block {
   position: absolute;
@@ -227,8 +199,13 @@ a {
   text-align: center;
   z-index: 2;
   pointer-events: none;
-  width: max-content;
-  max-width: 92%;
+  width: 100%;
+  max-width: min(94vw, 620px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   animation: rise 1s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
@@ -242,30 +219,151 @@ h1 {
   color: var(--ink);
   text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95);
   text-wrap: balance;
+  text-align: center;
 }
 
 .sub {
-  margin: 0.35rem 0 0;
-  padding-left: 0.36em;
+  margin: 0.35rem auto 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   font: 500 clamp(0.55rem, 0.85vw, 0.72rem)/1.2 var(--mono);
-  letter-spacing: 0.38em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(27, 35, 53, 0.8);
   text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
 }
 
+.sub-link,
 .sub-credit {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px dotted currentColor;
-  transition: color 0.15s, border-color 0.15s;
   pointer-events: auto;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 35, 53, 0.2);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
   letter-spacing: 0.15em;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
+/* Mobile Phone Centering Optimization */
+@media (max-width: 600px) {
+  .title-block {
+    top: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 94vw;
+    max-width: 94vw;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title-block h1 {
+    font-size: clamp(1.2rem, 5vw, 1.65rem);
+    text-align: center;
+  }
+
+  .sub {
+    margin: 0.3rem auto 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sub-link,
+  .sub-credit {
+    font-size: clamp(0.52rem, 2.6vw, 0.65rem);
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    max-width: 92vw;
+  }
+}
+
+@media (max-width: 390px) {
+  .title-block {
+    top: 52px;
+  }
+
+  .sub-link,
+  .sub-credit {
+    font-size: 0.52rem;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    gap: 4px;
+  }
+}
+
+.sub-link:hover,
 .sub-credit:hover {
+  color: #1b2335;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(224, 138, 20, 0.6);
+  box-shadow: 0 3px 12px rgba(224, 138, 20, 0.25);
+  transform: translateY(-1px);
+}
+
+.sub-link .sub-sep {
+  opacity: 0.5;
+}
+
+.sub-link .sub-brand {
+  font-weight: 700;
+  color: #b3600a;
+  transition: color 0.2s;
+}
+
+.sub-link:hover .sub-brand {
+  color: #e08a14;
+}
+
+.dark-mode .sub {
+  color: rgba(225, 235, 252, 0.85);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .sub-link,
+.dark-mode .sub-credit {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(18, 26, 46, 0.6);
+  color: #dbe4f3;
+}
+
+.dark-mode .sub-link .sub-brand {
   color: #ffd25e;
-  border-color: #ffd25e;
+}
+
+.dark-mode .sub-link:hover,
+.dark-mode .sub-credit:hover {
+  color: #ffffff;
+  background: rgba(255, 210, 94, 0.18);
+  border-color: rgba(255, 210, 94, 0.65);
+  box-shadow: 0 0 14px rgba(255, 210, 94, 0.4);
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -970,12 +1068,13 @@ h1 {
 }
 
 /* ==========================================================================
-   RIGHT DESK STUDY LAMP ("right side lamb") Focused on Books
+   RIGHT DESK STUDY LAMP ("right side lamb") Focused on Paper & Pen
    ========================================================================== */
 .desk-lamp-right {
   cursor: pointer;
 }
 
+.desk-lamp-right .lamp-beam-paper-wrap,
 .desk-lamp-right .lamp-beam-books-wrap {
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -992,18 +1091,21 @@ h1 {
   transition: opacity 0.5s ease;
 }
 
-/* In Dark Mode, Right Desk Lamp is ON and FOCUSED ON BOOKS */
+/* In Dark Mode, Right Desk Lamp is ON and FOCUSED ON PAPER AND PEN */
+.dark-mode .desk-lamp-right .lamp-beam-paper-wrap,
 .dark-mode .desk-lamp-right .lamp-beam-books-wrap {
   opacity: 0.98;
 }
 
+.dark-mode .desk-lamp-right .lamp-beam-paper,
 .dark-mode .desk-lamp-right .lamp-beam-books {
-  animation: bookLampBeamShimmer 5s ease-in-out infinite alternate;
+  animation: paperLampBeamShimmer 5s ease-in-out infinite alternate;
 }
 
+.dark-mode .desk-lamp-right .paper-light-pool,
 .dark-mode .desk-lamp-right .books-light-pool {
   opacity: 1;
-  animation: bookPoolPulse 4s ease-in-out infinite alternate;
+  animation: paperPoolPulse 4s ease-in-out infinite alternate;
 }
 
 .dark-mode .desk-lamp-right .lamp-bulb-right {
@@ -1016,18 +1118,19 @@ h1 {
   opacity: 0.92;
 }
 
-.dark-mode .books-stack {
-  filter: drop-shadow(0 0 12px rgba(255, 205, 85, 0.55)) brightness(1.15);
+/* Paper & Pen bathed in warm desk lamp illumination */
+.dark-mode .paper-pen-group {
+  filter: drop-shadow(0 0 14px rgba(255, 230, 130, 0.75)) drop-shadow(0 0 4px rgba(255, 248, 200, 0.9)) brightness(1.25);
   transition: filter 0.5s ease;
 }
 
-@keyframes bookLampBeamShimmer {
+@keyframes paperLampBeamShimmer {
   0% { opacity: 0.88; }
   50% { opacity: 1; }
   100% { opacity: 0.92; }
 }
 
-@keyframes bookPoolPulse {
+@keyframes paperPoolPulse {
   0% { opacity: 0.88; }
   50% { opacity: 1; }
   100% { opacity: 0.92; }

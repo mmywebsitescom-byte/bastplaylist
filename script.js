@@ -410,6 +410,7 @@
     themeText: $('#theme-text'),
     deskLamp: $('#desk-lamp'),
     deskLampRight: $('#desk-lamp-right'),
+    persistentAudio: $('#persistent-audio'),
     toast: $('#toast')
   };
 
@@ -487,19 +488,186 @@
     }
   }
 
+  /* ==========================================================================
+     PERSISTENT HTML5 <audio> PLAYER & BACKGROUND PLAYBACK ENGINE
+     Keeps audio running continuously while browsing DevRoom or when screen is turned off.
+     ========================================================================== */
+  var persistentAudio = els.persistentAudio || $('#persistent-audio');
+  if (!persistentAudio) {
+    persistentAudio = document.createElement('audio');
+    persistentAudio.id = 'persistent-audio';
+    persistentAudio.preload = 'auto';
+    persistentAudio.setAttribute('playsinline', '');
+    persistentAudio.setAttribute('webkit-playsinline', '');
+    document.body.appendChild(persistentAudio);
+    els.persistentAudio = persistentAudio;
+  }
+
+  // 1-second clean valid 44.1kHz silent WAV carrier to maintain hardware audio session in iOS Safari & Android Chrome
+  var SILENT_AUDIO_URI = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+  var persistentAudioActive = false;
+
+  function ensurePersistentAudioPlaying() {
+    if (!persistentAudio) return;
+    try {
+      if (!persistentAudio.src || persistentAudio.src === '' || persistentAudio.src.indexOf('data:audio') === -1) {
+        persistentAudio.src = SILENT_AUDIO_URI;
+        persistentAudio.loop = true;
+      }
+      var p = persistentAudio.play();
+      if (p && typeof p.then === 'function') {
+        p.then(function () {
+          persistentAudioActive = true;
+        }).catch(function () {
+          // Will unlock on next user gesture
+        });
+      }
+    } catch (e) {}
+  }
+
+  function pausePersistentAudio() {
+    if (!persistentAudio) return;
+    try {
+      persistentAudio.pause();
+    } catch (e) {}
+  }
+
+  /* ---------- Media Session API (System Lock Screen, Dynamic Island, Smartwatch) ---------- */
+  function updateMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    var tracks = getCurrentTracks();
+    var tr = tracks[currentIdx];
+    if (!tr) return;
+    var pl = getCurrentPlaylist();
+
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: tr.title,
+        artist: tr.artist,
+        album: pl.name + ' · DevRoom Lo-Fi Radio',
+        artwork: [
+          { src: 'https://img.youtube.com/vi/' + tr.ytId + '/hqdefault.jpg', sizes: '480x360', type: 'image/jpeg' },
+          { src: 'https://img.youtube.com/vi/' + tr.ytId + '/mqdefault.jpg', sizes: '320x180', type: 'image/jpeg' },
+          { src: 'https://img.youtube.com/vi/' + tr.ytId + '/default.jpg', sizes: '120x90', type: 'image/jpeg' }
+        ]
+      });
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+    } catch (e) {}
+  }
+
+  function seekTo(targetSec) {
+    if (ytPlayer && ytReady && typeof ytPlayer.seekTo === 'function') {
+      ytPlayer.seekTo(targetSec, true);
+    }
+    if ('mediaSession' in navigator && navigator.mediaSession.setPositionState) {
+      try {
+        var dur = (ytPlayer && ytReady && ytPlayer.getDuration) ? ytPlayer.getDuration() : 0;
+        navigator.mediaSession.setPositionState({
+          duration: Math.max(0, dur),
+          playbackRate: 1,
+          position: Math.min(targetSec, dur)
+        });
+      } catch (e) {}
+    }
+  }
+
+  function initMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+
+    var handlers = {
+      play: function () { if (!isPlaying) togglePlay(); },
+      pause: function () { if (isPlaying) togglePlay(); },
+      previoustrack: function () { selectTrack(currentIdx - 1, true); },
+      nexttrack: function () { selectTrack(currentIdx + 1, true); },
+      stop: function () { if (isPlaying) togglePlay(); },
+      seekto: function (details) {
+        if (details && details.seekTime != null) {
+          seekTo(details.seekTime);
+        }
+      }
+    };
+
+    for (var act in handlers) {
+      try {
+        navigator.mediaSession.setActionHandler(act, handlers[act]);
+      } catch (e) {}
+    }
+  }
+  initMediaSession();
+
+  /* ---------- Screen Wake Lock API (keeps screen awake while viewing DevRoom) ---------- */
+  var wakeLock = null;
+  async function requestWakeLock() {
+    if ('wakeLock' in navigator && isPlaying && !wakeLock) {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', function () {
+          wakeLock = null;
+        });
+      } catch (e) {}
+    }
+  }
+
+  function releaseWakeLock() {
+    if (wakeLock) {
+      try { wakeLock.release(); } catch (e) {}
+      wakeLock = null;
+    }
+  }
+
+  /* ---------- Background Audio Keepalive (Screen turned off or browsing away) ---------- */
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      // Screen locked/turned off or user switched tab/app:
+      // Keep persistent HTML5 audio player alive and ensure YouTube audio engine continues!
+      if (isPlaying) {
+        ensurePersistentAudioPlaying();
+        if (ytPlayer && ytReady && typeof ytPlayer.playVideo === 'function') {
+          try { ytPlayer.playVideo(); } catch (e) {}
+        }
+      }
+    } else {
+      // User turned screen back on or returned to DevRoom:
+      if (isPlaying) {
+        requestWakeLock();
+        updateMediaSession();
+      }
+    }
+  });
+
   function setPlayState(playing) {
     isPlaying = playing;
     document.body.classList.toggle('is-playing', playing);
     if (els.icoPlay) els.icoPlay.style.display = playing ? 'none' : 'block';
     if (els.icoPause) els.icoPause.style.display = playing ? 'block' : 'none';
     if (els.play) els.play.setAttribute('aria-label', playing ? 'Pause song' : 'Play song');
+
+    if (playing) {
+      ensurePersistentAudioPlaying();
+      requestWakeLock();
+    } else {
+      pausePersistentAudio();
+      releaseWakeLock();
+    }
+
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+      } catch (e) {}
+    }
   }
 
   function selectTrack(idx, autoPlay) {
     var tracks = getCurrentTracks();
     currentIdx = (idx + tracks.length) % tracks.length;
     updateMeta();
+    updateMediaSession();
     var tr = tracks[currentIdx];
+
+    if (autoPlay) {
+      ensurePersistentAudioPlaying();
+      requestWakeLock();
+    }
 
     if (ytPlayer && ytReady) {
       if (autoPlay) {
@@ -528,10 +696,13 @@
       ytPlayer.pauseVideo();
       setPlayState(false);
     } else {
+      ensurePersistentAudioPlaying();
+      requestWakeLock();
       ytPlayer.playVideo();
       setPlayState(true);
       flash('Playing: ' + tracks[currentIdx].title);
     }
+    updateMediaSession();
   }
 
   /* ---------- Playlist Switcher (Barber Shop vs Bast) ---------- */
@@ -648,6 +819,17 @@
         els.seek.value = pct;
         els.seek.style.background = 'linear-gradient(to right, #1DB954 0%, #1DB954 ' + pct + '%, rgba(255,255,255,0.16) ' + pct + '%, rgba(255,255,255,0.16) 100%)';
       }
+
+      // Synchronize Lock Screen, Dynamic Island, and Smartwatch scrubber
+      if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && dur > 0) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: Math.max(0, dur),
+            playbackRate: 1,
+            position: Math.min(cur, dur)
+          });
+        } catch (e) {}
+      }
     } catch (e) {}
   }
   setInterval(tick, 250);
@@ -668,7 +850,7 @@
       if (!ytPlayer || !ytReady) return;
       var dur = ytPlayer.getDuration() || 0;
       var targetSec = (parseFloat(els.seek.value) / 100) * dur;
-      ytPlayer.seekTo(targetSec, true);
+      seekTo(targetSec);
     });
   }
   document.addEventListener('pointerup', function () { if (isSeeking) isSeeking = false; });

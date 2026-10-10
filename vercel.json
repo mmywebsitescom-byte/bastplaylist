@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -17,7 +16,7 @@
       ]
     },
     {
-      "source": "/(.*).(jpg|jpeg|png|webp|svg|ico)",
+      "source": "/(.*\\.(?:jpg|jpeg|png|webp|svg|ico))",
       "headers": [
         {
           "key": "Cache-Control",
@@ -26,7 +25,7 @@
       ]
     },
     {
-      "source": "/(.*).(css|js)",
+      "source": "/(.*\\.(?:css|js))",
       "headers": [
         {
           "key": "Cache-Control",
@@ -35,14 +34,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/developers-room",
-      "dest": "/developers-room.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/developers-room",
+      "destination": "/developers-room.html"
     }
   ]
 }
