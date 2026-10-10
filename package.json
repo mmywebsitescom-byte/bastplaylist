@@ -4,7 +4,6 @@
   "description": "Developer's Room - Hostel Lo-Fi Radio with Barber Shop Bangers and Bast playlists",
   "private": true,
   "scripts": {
-    "build": "echo 'Static assets ready for deployment'",
     "start": "serve .",
     "dev": "serve ."
   },
