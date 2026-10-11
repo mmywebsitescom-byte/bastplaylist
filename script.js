@@ -29,28 +29,47 @@
   }
 
   /* ---------- Mobile (Android & iOS) Dynamic SVG Framing ---------- */
-  function updateViewBox() {
+  var currentViewBox = '';
+  var viewBoxRaf = null;
+
+  function applyViewBox() {
+    viewBoxRaf = null;
     var svg = document.querySelector('.stage > svg');
     if (!svg) return;
     var w = window.innerWidth;
     var h = window.innerHeight;
     var aspect = w / h;
+    var isPortrait = h >= w || (w <= 768 && aspect <= 0.88);
 
-    if (aspect < 0.76) {
+    var targetViewBox = '0 0 1600 800';
+    if (isPortrait) {
       // Tall portrait phone (iPhone, Android portrait: ~9:19 to 9:21)
       // Frames the developer at desk, typing hands, Raghab photo, and monitor
-      svg.setAttribute('viewBox', '320 110 940 690');
-    } else if (aspect < 1.15) {
+      targetViewBox = '320 110 940 690';
+    } else if (w <= 1024 && aspect < 1.25) {
       // Tablets / Foldables
-      svg.setAttribute('viewBox', '200 60 1200 740');
+      targetViewBox = '200 60 1200 740';
     } else {
       // Desktop / Landscape
-      svg.setAttribute('viewBox', '0 0 1600 800');
+      targetViewBox = '0 0 1600 800';
+    }
+
+    if (targetViewBox !== currentViewBox) {
+      currentViewBox = targetViewBox;
+      svg.setAttribute('viewBox', targetViewBox);
     }
   }
-  window.addEventListener('resize', updateViewBox);
-  window.addEventListener('orientationchange', updateViewBox);
-  updateViewBox();
+
+  function updateViewBox() {
+    if (viewBoxRaf) return;
+    viewBoxRaf = requestAnimationFrame(applyViewBox);
+  }
+
+  window.addEventListener('resize', updateViewBox, { passive: true });
+  window.addEventListener('orientationchange', function () {
+    setTimeout(applyViewBox, 100);
+  }, { passive: true });
+  applyViewBox();
 
   /* ---------- Scene decoration ---------- */
   // Lit windows on skyline
@@ -100,9 +119,11 @@
   }
 
   // Twinkling night stars in window sky (visible in Dark Mode)
+  var isMobileScreen = window.innerWidth < 768;
   var stars = $('#night-stars');
   if (stars) {
-    for (var si = 0; si < 46; si++) {
+    var starCount = isMobileScreen ? 18 : 46;
+    for (var si = 0; si < starCount; si++) {
       var sx = 1246 + rnd() * 276;
       var sy = 116 + rnd() * 220;
       var sr = (0.7 + rnd() * 1.5).toFixed(1);
@@ -123,7 +144,8 @@
   // Dust motes floating in sunbeam
   var motes = $('#motes');
   if (motes) {
-    for (var i = 0; i < 34; i++) {
+    var moteCount = isMobileScreen ? 12 : 34;
+    for (var i = 0; i < moteCount; i++) {
       var tt = rnd(), ss = rnd();
       var bx = 1232 + (560 - 1232) * tt;
       var bt = 150 + (500 - 150) * tt;
@@ -238,10 +260,12 @@
     return rows;
   }
 
-  function placeCursor(row) {
+  function placeCursor(row, charLen) {
     if (!curEl || !row) return;
-    var w = 0;
-    try { w = row.txt.getComputedTextLength(); } catch (e) {}
+    // Fast monospace character calculation (JetBrains Mono 10.5px ≈ 6.32px per char)
+    // Eliminates getComputedTextLength() layout thrashing on every keystroke!
+    var len = (typeof charLen === 'number') ? charLen : (row.txt && row.txt.textContent ? row.txt.textContent.length : 0);
+    var w = len * 6.32;
     curEl.setAttribute('x', (X_CODE + w + 1).toFixed(1));
     curEl.setAttribute('y', row.y - 10);
   }
@@ -261,16 +285,18 @@
       for (var r = 0; r < rows.length; r++) {
         var row = rows[r];
         row.num.setAttribute('opacity', '1');
-        placeCursor(row);
+        var lineChars = 0;
+        placeCursor(row, lineChars);
         for (var s = 0; s < row.spans.length; s++) {
           var part = row.spans[s];
           for (var c = 0; c < part.full.length; c++) {
             part.sp.textContent += part.full[c];
-            placeCursor(row);
-            await sleep(part.full[c] === ' ' ? 30 : 38 + rnd() * 62);
+            lineChars++;
+            placeCursor(row, lineChars);
+            await sleep(part.full[c] === ' ' ? 28 : 36 + rnd() * 50);
           }
         }
-        await sleep(160 + rnd() * 260);
+        await sleep(150 + rnd() * 220);
       }
       setStatus('main    building...', '#c9810f');
       await sleep(1000);
@@ -799,7 +825,7 @@
 
   // Live timer tick for progress, scrub bar, and seamless auto-advance fallback
   function tick() {
-    if (!ytPlayer || !ytReady || isSeeking) return;
+    if (!isPlaying || !ytPlayer || !ytReady || isSeeking) return;
     try {
       var cur = ytPlayer.getCurrentTime() || 0;
       var dur = ytPlayer.getDuration() || 0;
@@ -941,16 +967,25 @@
     els.themeBtn.addEventListener('click', toggleTheme);
   }
 
-  // Interactive desk lamps ("lamb lights"): Clicking directly on either study lamp toggles the room lights!
-  if (els.deskLamp) {
-    els.deskLamp.addEventListener('click', function () {
-      toggleTheme();
-    });
-  }
-  if (els.deskLampRight) {
-    els.deskLampRight.addEventListener('click', function () {
-      toggleTheme();
-    });
+  // Only allow direct study lamp click toggling on desktop pointer/mouse devices (hover: hover and pointer: fine)
+  // so mobile phone screen touches NEVER accidentally toggle or flicker room lights!
+  if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var lampBulb1 = $('.lamp-bulb');
+    if (lampBulb1) {
+      lampBulb1.style.cursor = 'pointer';
+      lampBulb1.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleTheme();
+      });
+    }
+    var lampBulb2 = $('.lamp-bulb-right');
+    if (lampBulb2) {
+      lampBulb2.style.cursor = 'pointer';
+      lampBulb2.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleTheme();
+      });
+    }
   }
 
   // Initial theme setup (defaults to Dark Mode so Lichu lights and Lamb light shine immediately!)

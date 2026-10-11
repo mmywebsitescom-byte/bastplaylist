@@ -4,7 +4,7 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --paper: #f3f6fb;
   --wall: #e4ebf4;
   --ink: #1b2335;
@@ -28,7 +28,7 @@
 
 html,
 body {
-  background: #10162a;
+  background: #080c16;
   color: var(--ink);
   font-family: var(--body);
   font-size: 15px;
@@ -37,13 +37,17 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  height: 100dvh;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
   overflow: hidden;
   position: fixed;
+  inset: 0;
+  overscroll-behavior: none;
+  -webkit-overscroll-behavior: none;
+  touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
 button,
@@ -60,13 +64,14 @@ a {
   outline-offset: 3px;
 }
 
-/* Full-bleed page wrapper */
+/* Full-bleed page wrapper pinned cleanly to edges */
 .wrap {
-  position: relative;
-  width: 100vw;
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  height: 100dvh;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* ==========================================================================
@@ -80,7 +85,7 @@ a {
   border-radius: 0;
   overflow: hidden;
   background: var(--wall);
-  isolation: isolate;
+  contain: strict;
 }
 
 .stage>svg {
@@ -89,7 +94,7 @@ a {
   width: 100%;
   height: 100%;
   display: block;
-  animation: settle 2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  pointer-events: none;
 }
 
 /* Parallax depth layers */
@@ -110,9 +115,13 @@ a {
 }
 
 .cam {
-  transform-box: view-box;
   transform-origin: 50% 55%;
-  animation: push 26s ease-in-out infinite alternate;
+}
+
+@media (min-width: 769px) {
+  .cam {
+    animation: push 26s ease-in-out infinite alternate;
+  }
 }
 
 /* ==========================================================================
@@ -390,9 +399,9 @@ h1 {
 .player-card {
   pointer-events: auto;
   width: min(580px, calc(100vw - 20px));
-  background: rgba(14, 21, 38, 0.65);
-  -webkit-backdrop-filter: blur(28px) saturate(1.8);
-  backdrop-filter: blur(28px) saturate(1.8);
+  background: rgba(14, 21, 38, 0.76);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1.5px solid rgba(255, 255, 255, 0.38);
   border-radius: 20px;
@@ -1029,6 +1038,7 @@ h1 {
 /* In Dark Mode, Desk Lamp ("lamb light") is ON */
 .dark-mode .desk-lamp .lamp-beam-wrap {
   opacity: 0.96;
+  pointer-events: none;
 }
 
 .dark-mode .desk-lamp .lamp-beam {
@@ -1042,12 +1052,12 @@ h1 {
 
 .dark-mode .desk-lamp .lamp-bulb {
   fill: url(#lampbulb) !important;
-  filter: drop-shadow(0 0 12px #ffe57a) drop-shadow(0 0 26px #ff9e22);
-  animation: bulbPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #ffe57a);
 }
 
 .dark-mode .desk-lamp .lamp-glow-ring {
   opacity: 0.88;
+  animation: lampGlowPulse 3s ease-in-out infinite alternate;
 }
 
 @keyframes lampBeamShimmer {
@@ -1062,9 +1072,9 @@ h1 {
   100% { opacity: 0.92; }
 }
 
-@keyframes bulbPulse {
-  0%, 100% { filter: drop-shadow(0 0 10px #ffe57a) drop-shadow(0 0 24px #ff9e22); }
-  50% { filter: drop-shadow(0 0 15px #ffffff) drop-shadow(0 0 34px #ffa633); }
+@keyframes lampGlowPulse {
+  0% { opacity: 0.65; }
+  100% { opacity: 0.95; }
 }
 
 /* ==========================================================================
@@ -1095,6 +1105,7 @@ h1 {
 .dark-mode .desk-lamp-right .lamp-beam-paper-wrap,
 .dark-mode .desk-lamp-right .lamp-beam-books-wrap {
   opacity: 0.98;
+  pointer-events: none;
 }
 
 .dark-mode .desk-lamp-right .lamp-beam-paper,
@@ -1110,12 +1121,12 @@ h1 {
 
 .dark-mode .desk-lamp-right .lamp-bulb-right {
   fill: url(#lampbulb) !important;
-  filter: drop-shadow(0 0 14px #ffe57a) drop-shadow(0 0 28px #ff9e22);
-  animation: bulbPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #ffe57a);
 }
 
 .dark-mode .desk-lamp-right .lamp-glow-ring-right {
   opacity: 0.92;
+  animation: lampGlowPulse 3s ease-in-out infinite alternate;
 }
 
 /* Paper & Pen bathed in warm desk lamp illumination */
@@ -1392,6 +1403,36 @@ body.dark-mode {
 
   .player-card.is-drawer-open .playlist-drawer {
     max-height: 250px;
+  }
+
+  /* Mobile battery and rendering optimization: pause full-screen SVG ambient animations */
+  .cam {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .clouds {
+    animation: none !important;
+  }
+
+  .sunbeam {
+    animation: none !important;
+  }
+
+  .curtain {
+    animation: none !important;
+  }
+
+  .torso {
+    animation: none !important;
+  }
+
+  .head {
+    animation: none !important;
+  }
+
+  .is-playing .head {
+    animation: bob 1.15s ease-in-out infinite !important;
   }
 }
 
@@ -1731,22 +1772,28 @@ body.dark-mode {
 }
 
 .curtain {
-  transform-box: fill-box;
   transform-origin: 50% 0;
   animation: sway 7s ease-in-out infinite;
 }
 
-
 .torso {
-  transform-box: view-box;
   transform-origin: 504px 640px;
-  animation: breathe 4.4s ease-in-out infinite;
+}
+
+@media (min-width: 769px) {
+  .torso {
+    animation: breathe 4.4s ease-in-out infinite;
+  }
 }
 
 .head {
-  transform-box: view-box;
   transform-origin: 502px 452px;
-  animation: headidle 7s ease-in-out infinite;
+}
+
+@media (min-width: 769px) {
+  .head {
+    animation: headidle 7s ease-in-out infinite;
+  }
 }
 
 .is-playing .head {
